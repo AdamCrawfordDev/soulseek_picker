@@ -9,7 +9,7 @@ class Song:
     duration: int
 
 @dataclass
-class Playlist:
+class InternalPlaylist:
     name: str
     songs: list[Song]
     

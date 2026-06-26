@@ -2,8 +2,7 @@ import os
 from dotenv import load_dotenv
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-from models.models import Song, Playlist
-
+from models.models import Song, InternalPlaylist
 
 def create_spotify_client() -> spotipy.Spotify:
     load_dotenv()
@@ -23,7 +22,7 @@ def create_spotify_client() -> spotipy.Spotify:
     )
 
 
-def get_playlist(playlist_id: str) -> Playlist:
+def get_playlist(playlist_id: str) -> InternalPlaylist:
     sp = create_spotify_client()
 
     spotify_playlist = sp.playlist(
