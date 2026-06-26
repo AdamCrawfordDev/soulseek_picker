@@ -2,11 +2,11 @@ from dataclasses import dataclass
 
 @dataclass
 class Song:
-    name: str
+    title: str
     artist: list[str]
     album: str
     explicit: bool
-    duration_ms: int
+    duration: int
 
 @dataclass
 class Playlist:

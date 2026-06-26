@@ -1,2 +1,5 @@
-".env" 
+.env
 .spotify_token_cache
+.vscode/
+**/__pycache__/
+*.pyc
