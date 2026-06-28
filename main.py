@@ -1,6 +1,6 @@
 import asyncio
-from rekordbox_mcp.database import RekordboxDatabase
-from rekordbox.rekordbox import Rekordbox
-rb = Rekordbox()
-asyncio.run(rb.start_rekordbox_connection())
-asyncio.run(rb.process_tracks())
+from utils.find_duplicates import build_queue
+from spotify.spotify import get_playlist
+from models.models import Song
+
+asyncio.run(build_queue(get_playlist("3uYQTjfq6QWuKrQCEEkZc2")))

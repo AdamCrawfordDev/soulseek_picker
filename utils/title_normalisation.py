@@ -1,20 +1,27 @@
 import re
 from rekordbox_mcp.models import Track
-    
-def normalise_track_metadata(track: Track) -> tuple[str | None, str]:
+from rekordbox.rekordbox import Rekordbox
+
+async def normalise_rekordbox_playlists():
+    rb = Rekordbox()
+    await rb.start_rekordbox_connection()
+    playlists = await rb.get_playlists()
+    for playlist in playlists:
+        tracks = await rb.get_tracks(playlist)
+        for track in tracks:
+            artist, title = normalise_track_metadata(track)
+            print(f"Updating to: {title} by {artist}")
+            await rb.update_track(track.id, title, artist)
+            
+def normalise_track_metadata(track: Track) -> tuple[str, str]:
     original_title = track.title.strip()
     original_artist = (track.artist or "").strip()
 
     title = original_title
-    artist = None
+    artist = ""
 
     artist_field_is_bad = False
 
-    # Case:
-    # Artist: Shakira - Hips Don't Lie (Intro) - 100
-    # Title : Shakira - Hips Don't Lie (Intro) - 100
-    #
-    # Treat artist as empty/bad, then extract artist from title.
     if original_artist and original_artist.casefold() == original_title.casefold():
         original_artist = ""
         artist_field_is_bad = True

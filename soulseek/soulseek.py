@@ -23,6 +23,8 @@ class Soulseek:
         request = await self.client.searches.search(song)
         await asyncio.sleep(5)
         return request.results
+    
+        
 
 def init_settings():
     logging.getLogger("aioslsk").setLevel(logging.CRITICAL)
@@ -36,5 +38,3 @@ def init_settings():
         )
     )
     
-soulseek = Soulseek()
-asyncio.run(soulseek.main())

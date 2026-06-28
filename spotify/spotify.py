@@ -45,7 +45,7 @@ def get_playlist(playlist_id: str) -> InternalPlaylist:
 
         songs.append(song)
 
-    return Playlist(
+    return InternalPlaylist(
         name=spotify_playlist["name"],
         songs=songs
     )
